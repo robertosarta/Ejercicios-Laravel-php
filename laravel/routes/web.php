@@ -1,18 +1,17 @@
 <?php
 
+use App\Http\Controllers\DocumentosController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\AboutController;
-use App\Http\Controllers\ListController;
-use App\Http\Controllers\SportsController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\ContactoController;
 
-Route::get('/', [HomeController::class, 'index']);
+Route::get('/', function() {
+    return view(('welcome'));
+});
 
-Route::get('/about', [AboutController::class, 'index']);
+Route::get('/contacto', [ContactoController::class, 'show'])->name('form.show');
+Route::post('/contacto', [ContactoController::class, 'procesar'])->name('form.make');
 
-Route::get('/list', [ListController::class, 'index']);
-
-Route::get('/list/sports', [SportsController::class, 'index']);
-
-Route::get('/list/users/{id}', [UserController::class, 'show']);
+Route::post('/documentos/subir', [DocumentosController::class, 'subir'])->name('documentos.subir');
+Route::get('/documentos/descargar/{id}', [DocumentosController::class, 'descargar'])->name('documentos.descargar');
+Route::get('/documentos/index', [DocumentosController::class, 'show'])->name('documentos.index');
