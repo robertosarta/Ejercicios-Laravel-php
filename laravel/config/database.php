@@ -42,6 +42,18 @@ return [
             'synchronous' => null,
         ],
 
+        'mongodb' => [
+            'driver' => 'mongodb',
+            'host' => env('DB_MONGO_HOST', '127.0.0.1'),
+            'port' => env('DB_MONGO_PORT', 27017),
+            'database' => env('DB_MONGO_DATABASE', 'laravel'),
+            'username' => env('DB_MONGO_USERNAME', ''),
+            'password' => env('DB_MONGO_PASSWORD', ''),
+            'options' => [
+                'database' => 'admin' //Base de datos de autenticación
+            ]
+        ],
+
         'mysql' => [
             'driver' => 'mysql',
             'url' => env('DB_URL'),
