@@ -24,10 +24,15 @@ class DocumentosController extends Controller
         return redirect()->route('documentos.index')->with('success', 'Archivo subido correctamnte');
     }
 
-/*
-    Me decia que download era un undefined method y no hubo manera de que funcionase
     public function descargar($archivo) {
-        return Storage::disk('public')->download('documentos/' .$archivo);
+        $path = Storage::disk('public')->path('documentos/'.$archivo);
+        
+        return response()->download($path);
     }
-*/
+
+    public function borrar($archivo) {
+        storage::disk('public')->delete('documentos/'.$archivo);
+        
+        return redirect()->route('documentos.index')->with('success', 'Archivo borrado correctamente');
+    }
 }
