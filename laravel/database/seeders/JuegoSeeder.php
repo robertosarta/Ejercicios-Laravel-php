@@ -15,17 +15,17 @@ class JuegoSeeder extends Seeder
     public function run(): void
     {
         //Crear etiquetas
-        $tagRPG = Tag::firstOrCreate(['nombre' => 'RPG']);
+        $tagRPG = Tag::firstOrCreate(['nombre' => 'RPG']);// si existe no lo crea y si no existe lo crea
         $tagAccion = Tag::firstOrCreate(['nombre' => 'Accion']);
 
         Juego::create([
             'titulo' => 'Starcratf 3',
             'descripcion' => 'Juego clasico de estrategia',
             'anio_lanzamiento' => 2004,
-            'tags' =>[$tagRPG->_id]
+            'tags' =>[$tagRPG->_id]// guardamos el _id asignado por MongoDB
         ]);
 
-        juego::create([
+        Juego::create([
             'titulo' => 'Cyberpunk 2077',
             'descripcion' => 'Juego de accion futurista',
             'anio_lanzamiento' => 2019,

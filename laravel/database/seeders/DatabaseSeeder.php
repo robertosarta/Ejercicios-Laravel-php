@@ -13,11 +13,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-
-        User::factory()->create([
+        $this->call([
+            TagSeeder::class, //Es mejor crear primero los tag y luego los juegos
             JuegoSeeder::class,
-            TagSeeder::class,
         ]);
     }
 }
