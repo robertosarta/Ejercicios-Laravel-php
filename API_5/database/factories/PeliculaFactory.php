@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Libro>
  */
-class LibroFactory extends Factory
+class PeliculaFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -20,7 +20,7 @@ class LibroFactory extends Factory
 
         return [
             'titulo' => $this->faker->sentence(3),
-            'autor' => $this->faker->name,
+            'director' => $this->faker->name,
             'publicacion' => $this->faker->year,  //faker tambien puede llamarse poniendo fake()
             'genero' => $genres[array_rand($genres)], //Aqui hemos creado antes nuestra prpia "libreria" en un array dentro de la variable genres
         ];

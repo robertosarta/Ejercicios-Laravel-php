@@ -4,16 +4,16 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Libro;
+use App\Models\Pelicula;
 
-class LibroController extends Controller
+class PeliculaController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return Libro::all();
+        return Pelicula::all();
     }
 
     /**
@@ -23,13 +23,13 @@ class LibroController extends Controller
     {
         $request->validate([
             'titulo' => 'required|string|max:255',
-            'autor' => 'required|string|max:255',
+            'director' => 'required|string|max:255',
             'publicacion' => 'required|digits:4|integer',
             'genero' => 'nullable|string|max:255'
         ]);
 
-        $libro = Libro::create($request->all());
-        return response()->json(['id' => $libro->id], 201);
+        $Pelicula = Pelicula::create($request->all());
+        return response()->json(['id' => $Pelicula->id], 201);
     }
 
     /**
@@ -37,12 +37,12 @@ class LibroController extends Controller
      */
     public function show(string $id)
     {
-        $libro = Libro::find($id);
+        $Pelicula = Pelicula::find($id);
 
-        if (!$libro){
-            return response()->json(['message' => 'Libro no encontrado'], 404);
+        if (!$Pelicula){
+            return response()->json(['message' => 'Pelicula no encontrado'], 404);
         }
-        return response()->json($libro);
+        return response()->json($Pelicula);
     }
 
     /**
@@ -50,20 +50,20 @@ class LibroController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $libro = Libro::find($id);
+        $Pelicula = Pelicula::find($id);
 
-        if(!$libro) {
-            return response()->json(['message' => 'Libro no encontrado'], 404);
+        if(!$Pelicula) {
+            return response()->json(['message' => 'Pelicula no encontrado'], 404);
         }
 
         $request->validate([
             'titulo' => 'sometimes|string|max:255', //Ponemos sometimes para poder hacer actualizaciones parciales. Pej; solo actualizar el titulo
-            'autor' => 'sometimes|string|max:255',
+            'director' => 'sometimes|string|max:255',
             'publicacion' => 'sometimes|digits:4|integer',
             'genero' => 'nullable|string|max:255'
         ]);
 
-        $libro->update($request->all());
+        $Pelicula->update($request->all());
     }
 
     /**
@@ -71,13 +71,13 @@ class LibroController extends Controller
      */
     public function destroy(string $id)
     {
-        $libro = Libro::find($id);
+        $Pelicula = Pelicula::find($id);
 
-        if(!$libro) {
-            return response()->json(['message' => 'Libro no encontrado'], 404);
+        if(!$Pelicula) {
+            return response()->json(['message' => 'Pelicula no encontrado'], 404);
         }
 
-        $libro->delete();
-        return response()->json(['message' => 'Libro borrado correctamente', 200]);
+        $Pelicula->delete();
+        return response()->json(['message' => 'Pelicula borrado correctamente', 200]);
     }
 }

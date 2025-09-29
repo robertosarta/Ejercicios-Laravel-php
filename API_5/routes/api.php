@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\Api\ExternalController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\LibroController;
+use App\Http\Controllers\Api\PeliculaController;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -27,7 +27,7 @@ use App\Http\Controllers\Api\LibroController;
 
 //Otra forma que crea automaticamente todo lo anterior (Resultado final exactamente el mismo)
 
-Route::apiResource('libros', LibroController::class);
+Route::apiResource('peliculas', PeliculaController::class);
 Route::apiResource('external', ExternalController::class);
 
 

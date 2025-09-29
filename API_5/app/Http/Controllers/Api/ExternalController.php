@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use App\Models\Personaje;
 
 class ExternalController extends Controller
 {
@@ -16,8 +17,17 @@ class ExternalController extends Controller
     public function index()
     {
         $response = Http::get($this->apiUrl);
+        $data = $response->json();
 
-        return $response->json();
+        $filtrado = array_map(function($personaje) {
+            return new Personaje(
+                $personaje['name'],
+                $personaje['status'],
+                $personaje['gender']
+            );
+        }, $data['results']);
+        
+        return $response()->json($filtrado);
     }
 
     /**
@@ -33,7 +43,15 @@ class ExternalController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $response = Http::get("$this->apiUrl/$id");
+
+        $data = $response->json();
+
+        return response()->json([
+            'nombre' => $data['name'],
+            'estado' => $data['status'],
+            'genero' => $data['gender']
+        ]);
     }
 
     /**
